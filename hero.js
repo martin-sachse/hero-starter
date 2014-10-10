@@ -33,15 +33,20 @@ var move = function(gameData, helpers) {
 			action: 'heal full',
 			move: nearestWell.direction
 		};
-	} else if (nearestNonTeamDiamondMine.distance > nearestEnemy.distance) {
+	} else if ((!nearestNonTeamDiamondMine && nearestEnemy) || nearestNonTeamDiamondMine.distance > nearestEnemy.distance) {
 		decision = {
 			action: 'fight',
 			move: nearestEnemy.direction
 		};
-	} else {
+	} else if (nearestNonTeamDiamondMine) {
 		decision = {
 			action: 'conquer',
 			move: nearestNonTeamDiamondMine.direction
+		};
+	} else {
+		decision = {
+			action: 'stay',
+			move: 'Stay'
 		};
 	}
 
